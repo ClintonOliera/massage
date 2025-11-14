@@ -1,5 +1,5 @@
 // ====== auth.js ======
-const API_URL = 'http://127.0.0.1:8000/api';
+const API_URL = 'https://lavylotus.onrender.com/api';
 
 /* ===== Modal Controls ===== */
 function openModal(id) {
@@ -15,6 +15,8 @@ function switchModal(hideId, showId) {
 window.onclick = function(e) {
   if (e.target.classList.contains('modal')) e.target.style.display = 'none';
 }
+
+
 
 /* ===== Check Authentication ===== */
 function checkAuth() {

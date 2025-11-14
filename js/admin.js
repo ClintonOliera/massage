@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:8000/api';
+const API_URL = 'https://lavylotus.onrender.com/api';
 
 /* ===== Auth Fetch Wrapper ===== */
 let redirecting = false; // flag to avoid multiple alerts
