@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/Z1srPv7lOy9C27hHQ+Xp8a4MxAQ5a+W6dY+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen">
 
@@ -45,7 +46,7 @@
         <!-- Welcome Card -->
         <div class="bg-white rounded-2xl shadow p-6 flex justify-between items-center">
             <div>
-            <h2 class="text-2xl font-semibold">Welcome back, <span id="adminName"></span> 👋</h2>
+            <h2 class="text-2xl font-semibold">Welcome, <span id="adminName"></span> 👋</h2>
             <p class="text-gray-600" id="todayDate"></p>
             </div>
             <i class="fa-solid fa-user-shield text-4xl text-blue-500"></i>
@@ -85,13 +86,32 @@
             </table>
         </div>
 
-        <!-- Recent Messages -->
-        <div class="bg-white rounded-2xl shadow p-6">
-            <h3 class="text-xl font-semibold mb-4">Recent Messages</h3>
-            <ul id="recentMessages" class="space-y-3"></ul>
-        </div>
+          <!-- Recent Messages -->
+          <div class="bg-white rounded-2xl shadow p-6">
+              <h3 class="text-xl font-semibold mb-4">Recent Messages</h3>
+              <ul id="recentMessages" class="space-y-3"></ul>
+          </div>
+          <!-- Recent Messages -->
+          <div class="p-4 bg-white shadow rounded-xl">
+            <h3>Total Visitors</h3>
+            <p id="totalVisitors" class="text-2xl font-bold text-blue-600">0</p>
+          </div>
 
-        </div>
+          <div class="p-4 bg-white shadow rounded-xl">
+            <h3>Unique Visitors</h3>
+            <p id="uniqueVisitors" class="text-2xl font-bold text-blue-600">0</p>
+          </div>
+
+          <h3 class="mt-6">Top Pages</h3>
+            <table>
+              <tbody id="topPagesBody"></tbody>
+            </table>
+
+        <h3 class="mt-6">Top Browsers</h3>
+        <table>
+          <tbody id="topBrowsersBody"></tbody>
+        </table>
+      </div>  
     </section>
 
     <!-- Bookings -->

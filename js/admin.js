@@ -272,3 +272,30 @@ async function loadDashboardStats() {
     console.error('Dashboard load failed:', err);
   }
 }
+
+async function loadAnalytics() {
+  const res = await authFetch(`${API_URL}/analytics-summary/`);
+
+  if (!res.ok) {
+    console.error("Failed to load analytics");
+    return;
+  }
+
+  const data = await res.json();
+
+  document.getElementById("totalVisitors").textContent = data.total_visits;
+  document.getElementById("uniqueVisitors").textContent = data.unique_visitors;
+
+  const pagesBody = document.getElementById("topPagesBody");
+  pagesBody.innerHTML = data.top_pages
+      .map(p => `<tr><td>${p.path}</td><td>${p.count}</td></tr>`)
+      .join("");
+
+  const browsersBody = document.getElementById("topBrowsersBody");
+  browsersBody.innerHTML = data.top_browsers
+      .map(b => `<tr><td>${b.browser}</td><td>${b.count}</td></tr>`)
+      .join("");
+}
+document.addEventListener('DOMContentLoaded', () => {
+  loadAnalytics();
+});
