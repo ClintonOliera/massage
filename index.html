@@ -1242,6 +1242,29 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
 
+        <script>
+            (function(){
+            // Do not block rendering; fire-and-forget
+            try {
+                // Build payload
+                const payload = {
+                page: window.location.pathname + window.location.search,
+                referrer: document.referrer || '',
+                userAgent: navigator.userAgent || ''
+                };
+
+                // send, ignore cross-origin if backend not reachable
+                fetch('https://lavylotus.onrender.com/api/track/', {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+                }).catch(()=>{ /* ignore failures */ });
+
+            } catch(e) { console.warn('tracking error', e); }
+            })();
+    </script>
         
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

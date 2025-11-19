@@ -87,31 +87,29 @@
         </div>
 
           <!-- Recent Messages -->
-          <div class="bg-white rounded-2xl shadow p-6">
-              <h3 class="text-xl font-semibold mb-4">Recent Messages</h3>
-              <ul id="recentMessages" class="space-y-3"></ul>
-          </div>
-          <!-- Recent Messages -->
-          <div class="p-4 bg-white shadow rounded-xl">
-            <h3>Total Visitors</h3>
-            <p id="totalVisitors" class="text-2xl font-bold text-blue-600">0</p>
-          </div>
-
-          <div class="p-4 bg-white shadow rounded-xl">
-            <h3>Unique Visitors</h3>
-            <p id="uniqueVisitors" class="text-2xl font-bold text-blue-600">0</p>
+          <div class="analytics-cards">
+            <div>
+              <h4>Total Visitors</h4>
+              <p id="totalVisitors">0</p>
+            </div>
+            <div>
+              <h4>Unique Visitors</h4>
+              <p id="uniqueVisitors">0</p>
+            </div>
           </div>
 
-          <h3 class="mt-6">Top Pages</h3>
-            <table>
-              <tbody id="topPagesBody"></tbody>
-            </table>
+          <h3>Top Pages</h3>
+            <table class="table"><tbody id="topPagesBody"></tbody></table>
 
-        <h3 class="mt-6">Top Browsers</h3>
-        <table>
-          <tbody id="topBrowsersBody"></tbody>
-        </table>
-      </div>  
+          <h3>Top Countries</h3>
+            <table class="table"><tbody id="topCountriesBody"></tbody></table>
+
+          <h3>Recent Visits</h3>
+            <table class="table">
+              <thead><tr><th>IP</th><th>Path</th><th>Location</th><th>UA</th><th>Time</th></tr></thead>
+                <tbody id="recentVisitsBody"></tbody>
+          </table>
+        </div>  
     </section>
 
     <!-- Bookings -->

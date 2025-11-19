@@ -274,27 +274,50 @@ async function loadDashboardStats() {
 }
 
 async function loadAnalytics() {
-  const res = await authFetch(`${API_URL}/analytics-summary/`);
+  try {
+    const res = await authFetch(`${API_URL}/analytics-summary/`);
+    if (!res.ok) {
+      console.error('Failed to load analytics', await res.text());
+      return;
+    }
+    const data = await res.json();
 
-  if (!res.ok) {
-    console.error("Failed to load analytics");
-    return;
+    document.getElementById('totalVisitors').textContent = data.total_visits ?? 0;
+    document.getElementById('uniqueVisitors').textContent = data.unique_visitors ?? 0;
+
+    // Top pages
+    const pagesBody = document.getElementById('topPagesBody');
+    if (pagesBody) {
+      pagesBody.innerHTML = data.top_pages.map(p => 
+        `<tr><td>${p.path || '(empty)'}</td><td>${p.count}</td></tr>`
+      ).join('');
+    }
+
+    // Top countries
+    const countriesBody = document.getElementById('topCountriesBody');
+    if (countriesBody) {
+      countriesBody.innerHTML = data.top_countries.map(c =>
+        `<tr><td>${c.country || 'Unknown'}</td><td>${c.count}</td></tr>`
+      ).join('');
+    }
+
+    // Recent visits
+    const recentBody = document.getElementById('recentVisitsBody');
+    if (recentBody) {
+      recentBody.innerHTML = data.recent.map(r =>
+        `<tr>
+          <td>${r.ip_address}</td>
+          <td>${r.path}</td>
+          <td>${r.country || ''}${r.city ? ' / ' + r.city : ''}</td>
+          <td>${r.browser || ''} / ${r.os || ''}</td>
+          <td>${new Date(r.created_at).toLocaleString()}</td>
+        </tr>`
+      ).join('');
+    }
+
+  } catch (err) {
+    console.error('Analytics load error', err);
   }
-
-  const data = await res.json();
-
-  document.getElementById("totalVisitors").textContent = data.total_visits;
-  document.getElementById("uniqueVisitors").textContent = data.unique_visitors;
-
-  const pagesBody = document.getElementById("topPagesBody");
-  pagesBody.innerHTML = data.top_pages
-      .map(p => `<tr><td>${p.path}</td><td>${p.count}</td></tr>`)
-      .join("");
-
-  const browsersBody = document.getElementById("topBrowsersBody");
-  browsersBody.innerHTML = data.top_browsers
-      .map(b => `<tr><td>${b.browser}</td><td>${b.count}</td></tr>`)
-      .join("");
 }
 document.addEventListener('DOMContentLoaded', () => {
   loadAnalytics();
